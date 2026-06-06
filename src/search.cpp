@@ -11,7 +11,7 @@ namespace Search {
 	
 	std::atomic<bool> stopped{false};
 	
-	u64 rep_stack[256];
+	u64 rep_stack[1024];
 	i32 game_ply = 0;
 	
 // MVV-LVA values

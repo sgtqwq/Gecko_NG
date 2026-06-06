@@ -36,7 +36,11 @@ struct SearchInfo {
 namespace Search {
 	extern std::atomic<bool> stopped;
 	
+	extern u64 rep_stack[1024];
+	extern i32 game_ply;
+	
 	void init();
+	void clear_tables();
 	Move search(Position& pos, SearchInfo& info, i32 max_depth);
 	void stop();
 }
