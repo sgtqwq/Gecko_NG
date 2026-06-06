@@ -114,8 +114,7 @@ namespace Search {
 		return alpha;
 	}
 	
-	bool is_repetition(const Position& pos, i32 ply) {
-		u64 hash = Zobrist::hash(pos);
+	bool is_repetition(u64 hash, i32 ply) {
 		
 		for (i32 j = game_ply + ply - 2; j >= 0; j -= 2) {
 			if (rep_stack[j] == hash) {
@@ -137,9 +136,9 @@ namespace Search {
 		
 		info.nodes++;
 		if (ply > info.seldepth) info.seldepth = ply;
-		
-		rep_stack[game_ply + ply] = Zobrist::hash(pos);
-		if (!is_root && is_repetition(pos, ply)) {
+		u64 key = Zobrist::hash(pos);
+		rep_stack[game_ply + ply] = key;
+		if (!is_root && is_repetition(key, ply)) {
 			return 0;
 		}
 		i32 king_sq = BB::lsb(pos.colour[0] & pos.pieces[King]);
@@ -160,7 +159,6 @@ namespace Search {
 		}
 		
 		// TT lookup
-		u64 key = Zobrist::hash(pos);
 		TTEntry* entry = tt.probe(key);
 		Move tt_move = NullMove;
 		
