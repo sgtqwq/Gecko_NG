@@ -174,8 +174,8 @@ namespace Search {
 				else if (tt_score < -MATE_SCORE + MAX_PLY) tt_score += ply;
 				
 				if (entry->flag == TT_EXACT) return tt_score;
-				if (entry->flag == TT_ALPHA && tt_score <= alpha) return alpha;
-				if (entry->flag == TT_BETA && tt_score >= beta) return beta;
+				if (entry->flag == TT_ALPHA && tt_score <= alpha) return tt_score;
+				if (entry->flag == TT_BETA && tt_score >= beta) return tt_score;
 			}
 		}
 		
