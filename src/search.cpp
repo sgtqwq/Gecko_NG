@@ -166,7 +166,7 @@ namespace Search {
 			tt_move = entry->best_move;
 			
 			if (!is_root && entry->depth >= depth) {
-				i32 tt_score = entry->score;
+				i32 tt_score = static_cast<i32>(entry->score);
 				
 				if (tt_score > MATE_SCORE - MAX_PLY) tt_score -= ply;
 				else if (tt_score < -MATE_SCORE + MAX_PLY) tt_score += ply;

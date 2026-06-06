@@ -106,8 +106,8 @@ void TT::store(u64 key, i32 depth, i32 score, u8 flag, Move move) {
 		if (was_empty) used++;
 		
 		entry->key = key;
-		entry->depth = depth;
-		entry->score = score;
+		entry->depth = static_cast<i16>(depth);
+		entry->score = static_cast<i16>(std::max(-32767, std::min(32767, score)));
 		entry->flag = flag;
 		entry->best_move = move;
 	}
