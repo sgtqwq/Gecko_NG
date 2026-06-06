@@ -142,7 +142,11 @@ namespace Search {
 		if (!is_root && is_repetition(pos, ply)) {
 			return 0;
 		}
+		i32 king_sq = BB::lsb(pos.colour[0] & pos.pieces[King]);
+		bool in_check = pos.is_attacked(king_sq);
 		
+		// Check extension
+		if (in_check) depth++;
 		// Mate distance pruning
 		i32 mate_value = MATE_SCORE - ply;
 		if (mate_value < beta) {
